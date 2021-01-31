@@ -1,11 +1,15 @@
 import fs from 'fs';
-import path from "path"
+import path from 'path';
 
-function isImageAvailable(fileName: string): boolean {
+function isImageAvailable(fileName = '', fileExtension='jpg'): boolean {
 
-  if(fileName.length === 0) return false;
-  
-  const filePath = path.join(__dirname,`../images`,fileName);
+  console.log("Checking availability of ",fileName);
+
+  if (fileName.length === 0) return false;
+
+  const filePath = path.join(__dirname, `../images`, `${fileName}.${fileExtension}`);
+
+  console.log("Full file path: ", filePath)
 
   try {
     if (fs.existsSync(filePath)) {
