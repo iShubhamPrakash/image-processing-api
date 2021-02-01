@@ -8,6 +8,9 @@ const app: Application = express();
 // Use logger middleware
 app.use(logger);
 
+// initialise public folder 
+app.use('/',express.static(__dirname + '/public'))
+
 // Use the routes/resizeRouter file to handle all the requests to endpoints that starts with "resize"
 app.use('/resize', resizeRouter);
 
@@ -16,9 +19,5 @@ app.get('/test', (req: Request, res: Response, next: NextFunction) => {
   res.send('Hello world!');
 });
 
-// Handle requests to root
-app.get('/', (req: Request, res: Response, next: NextFunction) => {
-  res.send('working');
-});
 
 export default app;

@@ -7,7 +7,9 @@
     "start": "tsc -p . && node dist/server.js",
     "dev": "nodemon --exec ts-node src/server.ts",
     "build": "tsc -p .",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint . --ext .ts",
+    "lint-fix": "eslint . --ext .ts --fix"
   },
   "keywords": [],
   "author": "Shubham Prakash",
