@@ -6,7 +6,6 @@ export function isImageAvailable(
   fileName = '',
   fileExtension = 'jpg'
 ): boolean {
-
   if (fileName.length === 0) return false;
 
   const filePath = path.join(

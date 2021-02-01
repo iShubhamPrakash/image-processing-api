@@ -22,7 +22,7 @@ describe('Test /resize route', () => {
       .query({
         name: 'thisisarandomfilename',
         width: 200,
-        height: 200
+        height: 200,
       })
       .send();
     expect(result.status).toBe(404);
@@ -34,10 +34,9 @@ describe('Test /resize route', () => {
       .query({
         name: 'fjord',
         width: 200,
-        height: 200
+        height: 200,
       })
       .send();
     expect(result.status).toBe(200);
   });
-
 });
