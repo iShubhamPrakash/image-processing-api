@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import path from 'path';
 import { getImageName, isImageAvailable } from '../utils';
-import resizeImage from '../utils/resize-image';
+import resizeImage from '../utils/resize_image';
 const resizeRouter = express.Router();
 
 resizeRouter.get('/', async (req: Request, res: Response) => {
