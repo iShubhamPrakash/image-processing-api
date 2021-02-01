@@ -1,7 +1,6 @@
 import express, { Request, Response } from 'express';
 import path from 'path';
-import getImageName from '../utils/getImageName';
-import isImageAvailable from '../utils/isImageAvailable';
+import { getImageName, isImageAvailable } from '../utils';
 import resizeImage from '../utils/resize-image';
 const resizeRouter = express.Router();
 
@@ -60,9 +59,7 @@ resizeRouter.get('/', async (req: Request, res: Response) => {
     path.join(__dirname, '/../images'),
     path.join(__dirname, '/../images')
   )
-    .then((filePath) =>
-      res.sendFile(filePath)
-    )
+    .then((filePath) => res.sendFile(filePath))
     .catch((error) =>
       res.json({
         error: 'Image couled not be resized',

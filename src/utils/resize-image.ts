@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path, { resolve } from 'path';
 import sharp from 'sharp';
-import getImageName from './getImageName';
+import { getImageName } from './index';
 
 // Main utility function to resize the image to the provided dimentions
 const resizeImage = (
@@ -16,7 +16,12 @@ const resizeImage = (
     const readStream = fs.createReadStream(
       `${inputPath}/${fileName}.${fileExtension}`
     );
-    const outputFile=`${outputPath}/${getImageName(fileName, width, height, fileExtension)}`
+    const outputFile = `${outputPath}/${getImageName(
+      fileName,
+      width,
+      height,
+      fileExtension
+    )}`;
     const writeStream = fs.createWriteStream(outputFile);
 
     //Resizing the image
