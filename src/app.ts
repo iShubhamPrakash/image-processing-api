@@ -7,9 +7,14 @@ const app: Application = express();
 // Use the routes/resizeRouter file to handle all the requests to endpoints that starts with "resize"
 app.use('/resize', resizeRouter);
 
-// Handle requests to root
+// Handle requests to /test endpoint
 app.get('/test', (req: Request, res: Response, next: NextFunction) => {
   res.send('Hello world!');
+});
+
+// Handle requests to root
+app.get('/', (req: Request, res: Response, next: NextFunction) => {
+  res.send('working');
 });
 
 
