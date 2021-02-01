@@ -1,4 +1,4 @@
-import express, { Application, Request, Response, NextFunction } from 'express';
+import express, { Application, Request, Response } from 'express';
 import logger from './middleware/logger';
 import resizeRouter from './routes/resizeRouter';
 

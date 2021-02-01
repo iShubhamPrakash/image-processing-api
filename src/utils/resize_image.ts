@@ -1,5 +1,4 @@
 import fs from 'fs';
-import path, { resolve } from 'path';
 import sharp from 'sharp';
 import { getImageName } from './index';
 
@@ -24,9 +23,9 @@ const resizeImage = (
     )}`;
     const writeStream = fs.createWriteStream(outputFile);
 
-    //Resizing the image
+    console.log('Resizing the image...');
     const transformer = sharp().resize(width, height);
-    const result = readStream.pipe(transformer).pipe(writeStream);
+    readStream.pipe(transformer).pipe(writeStream);
 
     writeStream.on('finish', () => {
       resolve(outputFile);

@@ -28,7 +28,7 @@ resizeRouter.get('/', async (req: Request, res: Response) => {
   }
 
   // Check if the image file is already present in the images directory
-  const imageAvailable = isImageAvailable(fileName);
+  const imageAvailable = isImageAvailable(fileName + '.' + fileExtension);
 
   // If image file not available, respond with an error message
   if (!imageAvailable) {
@@ -41,13 +41,14 @@ resizeRouter.get('/', async (req: Request, res: Response) => {
   // A sample file name fjord200x200.jpg
   const fullFileName = getImageName(fileName, width, height, fileExtension);
 
-  const requestedSizeAvailable = isImageAvailable(fullFileName, fileExtension);
+  const requestedSizeAvailable = isImageAvailable(fullFileName);
 
   // If yes, send it
   if (requestedSizeAvailable) {
+    console.log('Image already available, returning cached image');
     return res
       .status(200)
-      .sendFile(`../images/${fullFileName}.${fileExtension}`);
+      .sendFile(path.join(__dirname, '/../images/', fullFileName));
   }
 
   // If not, create the image file with the requested dimention and send it in the response
@@ -60,12 +61,13 @@ resizeRouter.get('/', async (req: Request, res: Response) => {
     path.join(__dirname, '/../images')
   )
     .then((filePath) => res.sendFile(filePath))
-    .catch((error) =>
+    .catch((error) => {
+      console.log(error);
       res.json({
         error: 'Image couled not be resized',
         success: false,
-      })
-    );
+      });
+    });
 });
 
 export default resizeRouter;

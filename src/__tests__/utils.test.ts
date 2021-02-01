@@ -6,7 +6,7 @@ describe('Tests for isImageAvailable function', () => {
   });
 
   it('should return false for invalid file name', async () => {
-    const result: boolean = isImageAvailable('arandomfilename', 'jpg');
+    const result: boolean = isImageAvailable('arandomfilename.jpg');
     expect(result).toBe(false);
   });
 
@@ -16,7 +16,7 @@ describe('Tests for isImageAvailable function', () => {
   });
 
   it('should return true for valid file name', async () => {
-    const result: boolean = isImageAvailable('fjord', 'jpg');
+    const result: boolean = isImageAvailable('fjord.jpg');
     expect(result).toBe(true);
   });
 });

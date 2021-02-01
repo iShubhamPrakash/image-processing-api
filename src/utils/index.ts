@@ -2,19 +2,12 @@ import fs from 'fs';
 import path from 'path';
 
 // This function checks if a image file is already available in the images directory
-export function isImageAvailable(
-  fileName = '',
-  fileExtension = 'jpg'
-): boolean {
+export function isImageAvailable(fileName = ''): boolean {
   if (fileName.length === 0) return false;
 
-  const filePath = path.join(
-    __dirname,
-    `../images`,
-    `${fileName}.${fileExtension}`
-  );
+  const filePath = path.join(__dirname, `../images`, `${fileName}`);
 
-  console.log('Full file path: ', filePath);
+  console.log('Checking the availability of: ', filePath);
 
   try {
     if (fs.existsSync(filePath)) {

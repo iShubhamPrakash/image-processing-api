@@ -29,14 +29,12 @@ describe('Test /resize route', () => {
   });
 
   it('Request to /resize should return staus 200 for a known file', async () => {
-    const result = await request(app)
-      .get('/resize')
-      .query({
-        name: 'fjord',
-        width: 200,
-        height: 200,
-      })
-      .send();
+    const result = await request(app).get('/resize').query({
+      name: 'fjord',
+      width: 200,
+      height: 200,
+    });
+
     expect(result.status).toBe(200);
   });
 });
