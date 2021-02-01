@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <title>Image Processing API</title>
+  </head>
+  <body>
+    <div class="container mt-4">
+      <div class="jumbotron text-center">
+        <h1 class="display-4">Image Processing API</h1>
+        <p class="lead">
+          A fast and scalable API to process (resize/format/convert) images
+        </p>
+        <br />
+
+        <ul class="list-group">
+          <li class="list-group-item">
+            <b>GET: </b>
+            "/resize?name={NAME}&width={WIDTH}&height={HEIGHT}&fileExtension=jpg"
+          </li>
+        </ul>
+      </div>
+
+      <div class="alert alert-success mt-4">
+        <h4>What is this project?</h4>
+
+        <p>
+          This is a node JS application built with typescript consisting of an
+          image processing API that takes an image file name and its dimension
+          (width and height) as input. On the server it checks if the image with
+          the requested dimensions is available or not. if the image is
+          available then it returns it otherwise it converts the image to the
+          requested size using the sharp.js library and then cache it on the server
+          so that it can be sent back to the client when next time the same
+          image is requested without having to process it again.
+        </p>
+      </div>
+
+      <div class="alert alert-warning">
+        <h4>How to Use?</h4>
+        <p>
+          Currently there are five different sample images available to get in
+          any size. (uploading feature is coming soon). You need to choose an
+          image out of these five, specify the dimention (width and height) and
+          make a GET request to the following endpoint with the given format:
+        </p>
+
+        <p><strong>Available images (file names):</strong></p>
+        <div class="row">
+          <div class="col col-12 col-md-6 col-lg-2">
+            <div class="card">
+              <img
+                class="card-img-top"
+                src="/thumbnails/encenadaport_200x200.jpg"
+                alt="encenadaport image"
+              />
+              <div class="card-body">
+                <p class="card-text"><small>encenadaport</small></p>
+              </div>
+            </div>
+          </div>
+          <div class="col col-12 col-md-6 col-lg-2">
+            <div class="card">
+              <img
+                class="card-img-top"
+                src="/thumbnails/fjord_200x200.jpg"
+                alt="fjord image"
+              />
+              <div class="card-body">
+                <p class="card-text"><small>fjord</small></p>
+              </div>
+            </div>
+          </div>
+          <div class="col col-12 col-md-6 col-lg-2">
+            <div class="card">
+              <img
+                class="card-img-top"
+                src="/thumbnails/icelandwaterfall_200x200.jpg"
+                alt="icelandwaterfall image"
+              />
+              <div class="card-body">
+                <p class="card-text"><small>icelandwaterfall</small></p>
+              </div>
+            </div>
+          </div>
+          <div class="col col-12 col-md-6 col-lg-2">
+            <div class="card">
+              <img
+                class="card-img-top"
+                src="/thumbnails/palmtunnel_200x200.jpg"
+                alt="palmtunnel image"
+              />
+              <div class="card-body">
+                <p class="card-text"><small>palmtunnel</small></p>
+              </div>
+            </div>
+          </div>
+          <div class="col col-12 col-md-6 col-lg-2">
+            <div class="card">
+              <img
+                class="card-img-top"
+                src="/thumbnails/santamonica_200x200.jpg"
+                alt="santamonica image"
+              />
+              <div class="card-body">
+                <p class="card-text"><small>santamonica</small></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert alert-info" role="alert" id="use">
+        <h4>API documentation:</h4>
+
+        <ul class="list-group">
+          <li class="list-group-item"><b>Endpoint: </b> /resize</li>
+          <li class="list-group-item"><b>Method: </b> GET</li>
+        </ul>
+        <br />
+        <p><strong>Query Parameters:</strong></p>
+        <ul class="list-group">
+          <li class="list-group-item"><b>name: </b> string</li>
+          <li class="list-group-item"><b>width: </b> number</li>
+          <li class="list-group-item"><b>height:</b> number</li>
+          <li class="list-group-item">
+            <b>fileExtension:</b> string [Optional]
+          </li>
+        </ul>
+
+        <br />
+        <p><strong>Example requests:</strong></p>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <a
+              href="http://localhost:5000/resize?name=encenadaport&width=1000&height=1200"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <pre>http://localhost:5000/resize?name=encenadaport&width=1000&height=1200</pre
+              >
+            </a>
+          </li>
+          <li class="list-group-item">
+            <a
+              href="http://localhost:5000/resize?name=fjord&width=300&height=300"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <pre>http://localhost:5000/resize?name=fjord&width=300&height=300</pre
+              >
+            </a>
+          </li>
+          <li class="list-group-item">
+            <a
+              href="http://localhost:5000/resize?name=icelandwaterfall&width=800&height=1500"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <pre>http://localhost:5000/resize?name=icelandwaterfall&width=800&height=1500</pre
+              >
+            </a>
+          </li>
+          <li class="list-group-item">
+            <a
+              href="http://localhost:5000/resize?name=palmtunnel&width=800&height=1500"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <pre>http://localhost:5000/resize?name=palmtunnel&width=800&height=1500</pre
+              >
+            </a>
+          </li>
+          <li class="list-group-item">
+            <a
+              href="http://localhost:5000/resize?name=santamonica&width=800&height=1500"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <pre>http://localhost:5000/resize?name=santamonica&width=800&height=1500</pre
+              >
+            </a>
+          </li>
+        </ul>
+        <br />
+        <small>
+          <p>
+            <strong>Tip:</strong>
+            If you are running the project locally then you can directly open
+            the above links in a browser to test. Change the size in the address
+            bar to get different sized images.
+          </p>
+          <p><a 
+            href="https://www.youtube.com/watch?v=svoagx8R2sA"
+            target="_blank"
+            rel="noopener noreferrer">Check a demo video here</a></p>
+        </small>
+      </div>
+
+      <div class="alert alert-primary" role="alert">
+        <h4>Author</h4>
+
+        <p>
+          <a
+            href="https://shubhamprakash.dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Shubham Prakash</a
+          >
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

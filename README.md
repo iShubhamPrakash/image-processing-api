@@ -33,6 +33,8 @@ This is a node JS application built with typescript consisting of an image proce
     npm start
 ```
 
+> Note: Before starting the server from the dist folder using above command, make sure that the dist folder contain /images and /public directoy including all the static assets (default image files and a index.html file). This is important because I have not used webpack to automatically move these static files into the dist folder. The build command, in this project, only converts ts into js and put them in the dist folder. So you may have to manually copy these static file from src to dist.
+
 4. Develop locally
 ```
     npm run dev
