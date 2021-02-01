@@ -35,6 +35,6 @@ export function getImageName(
   width: string | number,
   height: string | number,
   fileExtension = 'jpg'
-) {
+): string {
   return `${fileName}_${width}x${height}.${fileExtension}`;
 }

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node dist/server.js",
+    "start": "tsc -p . && node dist/server.js",
     "dev": "nodemon --exec ts-node src/server.ts",
     "build": "tsc -p .",
     "test": "jest"
@@ -14,6 +14,7 @@
   "license": "ISC",
   "devDependencies": {
     "@types/express": "^4.17.11",
+    "@types/morgan": "^1.9.2",
     "@types/node": "^14.14.21",
     "@types/sharp": "^0.27.1",
     "@types/supertest": "^2.0.10",
@@ -34,6 +35,7 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "morgan": "^1.10.0",
     "sharp": "^0.27.1"
   },
   "jest": {

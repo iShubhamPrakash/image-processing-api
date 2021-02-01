@@ -1,8 +1,12 @@
 import express, { Application, Request, Response, NextFunction } from 'express';
+import logger from './middleware/logger';
 import resizeRouter from './routes/resizeRouter';
 
 //Instantiating express app
 const app: Application = express();
+
+// Use logger middleware
+app.use(logger);
 
 // Use the routes/resizeRouter file to handle all the requests to endpoints that starts with "resize"
 app.use('/resize', resizeRouter);
@@ -16,6 +20,5 @@ app.get('/test', (req: Request, res: Response, next: NextFunction) => {
 app.get('/', (req: Request, res: Response, next: NextFunction) => {
   res.send('working');
 });
-
 
 export default app;
