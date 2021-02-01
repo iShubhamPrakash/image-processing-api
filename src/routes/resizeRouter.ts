@@ -1,6 +1,8 @@
 import express, { Request, Response } from 'express';
 import path from 'path';
+import getImageName from '../utils/getImageName';
 import isImageAvailable from '../utils/isImageAvailable';
+import resizeImage from '../utils/resize-image';
 const resizeRouter = express.Router();
 
 resizeRouter.get('/', async (req: Request, res: Response) => {
@@ -8,26 +10,26 @@ resizeRouter.get('/', async (req: Request, res: Response) => {
 
   // Get the data from query parameters
   const fileName = req.query.name && (req.query.name as string).split('.')[0];
-  const fileExtension = req.query.fileExtension || 'jpg';
-  const width = req.query.width;
-  const height = req.query.height;
+  const fileExtension = (req.query.fileExtension as string) || 'jpg';
+  const width = req.query.width as string;
+  const height = req.query.height as string;
 
   // send error if valid file name not exist
-  if (!Boolean(fileName)) {
+  if (!fileName) {
     return res.status(400).json({
       error: 'Please specify the file name',
     });
   }
 
   // send error if valid dimentsions not exist
-  if (!Boolean(width) || !Boolean(height)) {
+  if (!width || !height) {
     return res.status(400).json({
       error: 'Please specify both width and height values',
     });
   }
 
   // Check if the image file is already present in the images directory
-  const imageAvailable = isImageAvailable(fileName as string);
+  const imageAvailable = isImageAvailable(fileName);
 
   // If image file not available, respond with an error message
   if (!imageAvailable) {
@@ -38,25 +40,35 @@ resizeRouter.get('/', async (req: Request, res: Response) => {
 
   // If image file available, check if the same image with the requested size is available
   // A sample file name fjord200x200.jpg
-  const fullFileName = `${fileName}${width}x${height}`;
+  const fullFileName = getImageName(fileName, width, height, fileExtension);
 
-  const requestedSizeAvailable = isImageAvailable(
-    fullFileName,
-    fileExtension as string
-  );
+  const requestedSizeAvailable = isImageAvailable(fullFileName, fileExtension);
 
   // If yes, send it
   if (requestedSizeAvailable) {
     return res
       .status(200)
-      .sendFile(
-        path.join(__dirname, '../images', `${fullFileName}.${fileExtension}`)
-      );
+      .sendFile(`../images/${fullFileName}.${fileExtension}`);
   }
 
   // If not, create the image file with the requested dimention and send it in the response
-
-  res.send('Image Resized');
+  resizeImage(
+    fileName,
+    fileExtension,
+    parseInt(width),
+    parseInt(height),
+    path.join(__dirname, '/../images'),
+    path.join(__dirname, '/../images')
+  )
+    .then((filePath) =>
+      res.sendFile(filePath)
+    )
+    .catch((error) =>
+      res.json({
+        error: 'Image couled not be resized',
+        success: false,
+      })
+    );
 });
 
 export default resizeRouter;
