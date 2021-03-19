@@ -4,10 +4,9 @@ A fast and scalable API to process (resize/format/convert) images
 
 > GET: "/resize?name={NAME}&width={WIDTH}&height={HEIGHT}&fileExtension=jpg"
 
-
 ## What is this project?
-This is a node JS application built with typescript consisting of an image processing API that takes an image file name and its dimension (width and height) as input. On the server it checks if the image with the requested dimensions is available or not. if the image is available then it returns it otherwise it converts the image to the requested size using the sharp.js library and then cache it on the server so that it can be sent back to the client when next time the same image is requested without having to process it again.
 
+This is a node JS application built with typescript consisting of an image processing API that takes an image file name and its dimension (width and height) as input. On the server it checks if the image with the requested dimensions is available or not. if the image is available then it returns it otherwise it converts the image to the requested size using the sharp.js library and then cache it on the server so that it can be sent back to the client when next time the same image is requested without having to process it again.
 
 ### Tech Stack used
 
@@ -20,34 +19,39 @@ This is a node JS application built with typescript consisting of an image proce
 1. Install dependecies:
 
 ```
-    npm install
+    yarn install
 ```
 
 2. Build
+
 ```
-    npm run build
+    yarn run build
 ```
 
 3. Start the server
+
 ```
-    npm start
+    yarn start
 ```
 
 > Note: Before starting the server from the dist folder using above command, make sure that the dist folder contain /images and /public directoy including all the static assets (default image files and a index.html file). This is important because I have not used webpack to automatically move these static files into the dist folder. The build command, in this project, only converts ts into js and put them in the dist folder. So you may have to manually copy these static file from src to dist.
 
 4. Develop locally
+
 ```
-    npm run dev
+    yarn run dev
 ```
 
 5. Run unit tests
+
 ```
-    npm run test
+    yarn run test
 ```
 
 6. Run ESlint to fix linting issues
+
 ```
-    npm run lint
+    yarn run lint
 ```
 
 After you successfully run the server, open this URL in your browser
@@ -57,6 +61,7 @@ After you successfully run the server, open this URL in your browser
 ```
 
 ## How to Use the API?
+
 Currently there are five different sample images available to get in any size. (uploading feature is coming soon). You need to choose an image out of these five, specify the dimention (width and height) and make a GET request to the following endpoint with the given format:
 
 ### Available images (file names):
@@ -157,5 +162,7 @@ Tip: If you are running the project locally then you can directly open the above
 ### Demo
 
 [![Demo](https://img.youtube.com/vi/svoagx8R2sA/0.jpg)](https://www.youtube.com/watch?v=svoagx8R2sA)
+
 ## Author
+
 [Shubham Prakash](https://shubhamprakash.dev)
